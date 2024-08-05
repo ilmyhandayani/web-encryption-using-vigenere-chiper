@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>File Encryption</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>File Encryption or Decryption </h1>
+    <h2>(.docx)</h2>
+    
+    <div class="container">
+        <form action="/" method="POST" enctype="multipart/form-data">
+            <label for="file">Choose a file:</label>
+            <input type="file" name="file" id="file" required>
+            <br><br>
+            <label for="key">Encryption/Decryption Key:</label>
+            <input type="" name="key" id="key" required>
+            <br><br>
+            <input type="submit" value="Encrypt File">
+        </form>
+
+        {% if message %}
+        <div class="message">{{ message }}</div>
+        {% endif %}
+
+        {% if encrypted_file %}
+        <div class="file-link">
+            <a href="{{ url_for('download', filename=encrypted_file) }}">Download Encrypted File</a>
+        </div>
+        {% endif %}
+    </div>
+    <div>
+        <br><br>
+    </div>
+    <div class="container">
+        <form action="/decrypt" method="POST" enctype="multipart/form-data">
+            <label for="file">Choose an encrypted file:</label>
+            <input type="file" name="file" id="file" required>
+            <br><br>
+            <label for="key">Encryption/Decryption Key:</label>
+            <input type="" name="key" id="key" required>
+            <br><br>
+            <input type="submit" value="Decrypt File">
+        </form>
+
+        {% if decrypted_file %}
+        <div class="file-link">
+            <a href="{{ url_for('download', filename=decrypted_file) }}">Download Decrypted File</a>
+        </div>
+        {% endif %}
+    </div>
+    <div>
+        <form action="/logout" method="POST">
+            <br><br>
+            <input type="submit" value="LOGOUT">
+        </form>
+    </div>
+</body>
+</html>
